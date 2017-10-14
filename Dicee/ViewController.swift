@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        changeDiceValue(randomValue1: randomDiceIndex(), randomValue2: randomDiceIndex())
+        changeDiceValue()
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,16 +26,20 @@ class ViewController: UIViewController {
     }
     
     @IBAction func rollButtonPressed(_ sender: UIButton) {
-        changeDiceValue(randomValue1: randomDiceIndex(), randomValue2: randomDiceIndex())
+        changeDiceValue()
     }
     
     func randomDiceIndex() -> Int {
         return Int(arc4random_uniform(6))
     }
     
-    func changeDiceValue(randomValue1 : Int, randomValue2 : Int) {
-        diceImageView1.image = UIImage(named: diceArray[randomValue1])
-        diceImageView2.image = UIImage(named: diceArray[randomValue2])
+    func changeDiceValue() {
+        diceImageView1.image = UIImage(named: diceArray[randomDiceIndex()])
+        diceImageView2.image = UIImage(named: diceArray[randomDiceIndex()])
+    }
+    
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        changeDiceValue()
     }
     
 }
